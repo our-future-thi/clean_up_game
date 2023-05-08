@@ -1,3 +1,4 @@
+import 'package:clean_up_game/shared/auth_wrapper.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/settings.dart';
@@ -28,7 +29,7 @@ AppBar getAppBar(BuildContext context, String title,
         child: IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const SettingsPage();
+              return const AuthWrapper(child: SettingsPage());
             }));
           },
           icon: const Icon(Icons.settings_rounded),

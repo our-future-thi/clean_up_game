@@ -1,4 +1,5 @@
 import 'package:clean_up_game/screens/login.dart';
+import 'package:clean_up_game/shared/auth_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,7 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const LoginScreen();
+                          return const AuthWrapper(child: LoginScreen());
                         }));
                       },
                       icon: const Icon(Icons.login_rounded),

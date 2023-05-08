@@ -19,63 +19,66 @@ class HomeScreen extends StatelessWidget {
     var credits = logs.fold<int>(
         0, (previousValue, element) => previousValue + element.change);
 
-    var width = min(MediaQuery.of(context).size.width - 32,
-        MediaQuery.of(context).size.height / 2);
+    var width = min(MediaQuery.of(context).size.width - 64,
+        min(MediaQuery.of(context).size.height / 2, 350.0));
 
     return Scaffold(
       appBar: getAppBar(context, 'Clean Up Game'),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Card(
-              elevation: 5,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: BarcodeWidget(
-                  data: AuthService.user!.uid,
-                  width: width,
-                  height: width,
-                  barcode: Barcode.qrCode(),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                elevation: 5,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: BarcodeWidget(
+                    data: AuthService.user!.uid,
+                    width: width,
+                    height: width,
+                    barcode: Barcode.qrCode(),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                children: [
-                  Text(
-                    credits.toString(),
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: credits > 0
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.tertiary,
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  children: [
+                    Text(
+                      credits.toString(),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: credits > 0
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.tertiary,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'Credits',
-                    style: TextStyle(
-                      fontSize: 16,
+                    const Text(
+                      'Credits',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: width + 8),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: logs.length,
-                itemBuilder: (context, index) => LogCard(
-                  log: logs[index],
+                  ],
                 ),
               ),
-            ),
-          ],
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: width + 32),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: logs.length,
+                  itemBuilder: (context, index) => LogCard(
+                    log: logs[index],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
