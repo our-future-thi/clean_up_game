@@ -1,3 +1,4 @@
+import 'package:clean_up_game/screens/home.dart';
 import 'package:clean_up_game/screens/login.dart';
 import 'package:clean_up_game/shared/auth_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,19 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  Future<void> logout() async {
+    await AuthService.logoutUser();
+
+    // ignore: use_build_context_synchronously
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return const AuthWrapper(child: HomeScreen());
+      }),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var headerSize = 16.0;
@@ -160,7 +174,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: FilledButton.icon(
                       onPressed: () {
                         setState(() {
-                          AuthService.logoutUser();
+                          logout();
                         });
                       },
                       icon: const Icon(Icons.logout_rounded),
