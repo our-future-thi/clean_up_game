@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
       appBar: getAppBar(context, 'Login'),
       body: Center(
         child: ElevatedButton.icon(
-          onPressed: () => AuthService.loginMicrosoft(),
+          onPressed: () => AuthService().loginMicrosoft(),
           icon: const Icon(Icons.login),
           label: const Text('Login'),
         ),

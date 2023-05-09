@@ -17,9 +17,19 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   Future<void> logout() async {
-    await AuthService.logoutUser();
+    await AuthService().logoutUser();
 
     // ignore: use_build_context_synchronously
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return const AuthWrapper(child: HomeScreen());
+      }),
+      (route) => false,
+    );
+  }
+
+  void login() {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) {
@@ -33,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     var headerSize = 16.0;
 
-    var user = AuthService.user;
+    var user = AuthService().user;
 
     return Scaffold(
       appBar: getAppBar(context, 'Einstellungen', false),
@@ -89,100 +99,30 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-            Visibility(
-              visible: user == null,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(Icons.person_rounded),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(Icons.person_rounded),
+                ),
+                Expanded(
+                  child: Text('Konto',
+                      style: TextStyle(
+                        fontSize: headerSize,
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 6.0),
+                  child: FilledButton.icon(
+                    onPressed: () {
+                      user == null ? login() : logout();
+                    },
+                    icon: const Icon(Icons.login_rounded),
+                    label: Text(user == null ? "Anmelden" : "Abmelden"),
                   ),
-                  Expanded(
-                    child: Text('Mitgliederbereich',
-                        style: TextStyle(
-                          fontSize: headerSize,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6.0),
-                    child: FilledButton.icon(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const AuthWrapper(child: LoginScreen());
-                        }));
-                      },
-                      icon: const Icon(Icons.login_rounded),
-                      label: const Text("Anmelden"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Visibility(
-              visible: user != null,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(Icons.games_rounded),
-                  ),
-                  Expanded(
-                    child: Text('Spieleinstellungen',
-                        style: TextStyle(
-                          fontSize: headerSize,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6.0),
-                    child: FilledButton.icon(
-                      onPressed: () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) {
-                        //   return const EditScoresProvider();
-                        // }));
-                      },
-                      icon: const Icon(Icons.edit_rounded),
-                      label: const Text("Punkte eintragen"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
-            ),
-            Visibility(
-              visible: user != null,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(Icons.person_rounded),
-                  ),
-                  Expanded(
-                    child: Text('Mitgliederbereich',
-                        style: TextStyle(
-                          fontSize: headerSize,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6.0),
-                    child: FilledButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          logout();
-                        });
-                      },
-                      icon: const Icon(Icons.logout_rounded),
-                      label: const Text("Abmelden"),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: BarcodeWidget(
-                    data: AuthService.user!.uid,
+                    data: AuthService().user!.uid,
                     width: width,
                     height: width,
                     barcode: Barcode.qrCode(),
