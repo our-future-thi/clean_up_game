@@ -42,6 +42,7 @@ dependencies:
   json_annotation: ^4.8.1
   cloud_firestore: ^4.6.0
   barcode_widget: ^2.0.3
+  social_login_buttons: ^1.0.7
 
 dev_dependencies:
   flutter_test:

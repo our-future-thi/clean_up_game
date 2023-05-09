@@ -14,7 +14,17 @@ class AuthService {
   }
 
   Future<void> loginMicrosoft() async {
-    var provider = OAuthProvider('microsoft.com');
+    var provider = MicrosoftAuthProvider();
+    await FirebaseAuth.instance.signInWithPopup(provider);
+  }
+
+  Future<void> loginGoogle() async {
+    var provider = GoogleAuthProvider();
+    await FirebaseAuth.instance.signInWithPopup(provider);
+  }
+
+  Future<void> loginGithub() async {
+    var provider = GithubAuthProvider();
     await FirebaseAuth.instance.signInWithPopup(provider);
   }
 
