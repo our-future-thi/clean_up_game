@@ -41,7 +41,6 @@ class HomeScreen extends StatelessWidget {
                       data: AuthService().user!.uid,
                       size: size,
                       padding: EdgeInsets.zero,
-                      
                     ),
                   ),
                 ),
