@@ -1,6 +1,6 @@
 # Campus Clean Up Game
 
-This is a the companion app for the Campus Clean Up Game to store your credits and spend them on rewards.
+This is a the companion app for the Campus Clean Up Game organized by [OurFuture e.V.](https://www.ourfuturethi.de/) at the THI to store your credits and spend them on rewards.
 
 🌐 <https://clean-up.app/> 🌐
 
