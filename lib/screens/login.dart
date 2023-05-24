@@ -1,6 +1,6 @@
+import 'package:clean_up_game/screens/utils/sign_in_button.dart';
 import 'package:clean_up_game/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
 
 import '../shared/appbar.dart';
 
@@ -23,26 +23,67 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SocialLoginButton(
+                  SignInButton(
+                    provider: 'Anonymously',
+                    onPressed: () async {
+                      // open dialog to warn user about data loss
+                      var accept = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Warning'),
+                          content: const Text(
+                            'You are about to sign in anonymously. This means that your data will be lost when you log out or your session expires. Do you want to continue?',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, false);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                              child: const Text('Continue'),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (accept) {
+                        await AuthService().loginAnon();
+                      }
+                    },
+                    prefix: 'Sign in',
+                    icon: Icons.lock_rounded,
+                  ),
+                  const SizedBox(height: 8),
+                  SignInButton(
+                    img: 'google.svg',
+                    provider: 'Google',
                     onPressed: () async {
                       await AuthService().loginGoogle();
                     },
-                    buttonType: SocialLoginButtonType.google,
                   ),
                   const SizedBox(height: 8),
-                  SocialLoginButton(
+                  SignInButton(
+                    img: 'microsoft.svg',
+                    provider: 'Microsoft',
                     onPressed: () async {
                       await AuthService().loginMicrosoft();
                     },
-                    buttonType: SocialLoginButtonType.microsoft,
                   ),
                   const SizedBox(height: 8),
-                  SocialLoginButton(
+                  SignInButton(
+                    img: 'github.svg',
+                    provider: 'Github',
                     onPressed: () async {
                       await AuthService().loginGithub();
                     },
-                    buttonType: SocialLoginButtonType.github,
+                    invert: true,
                   ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

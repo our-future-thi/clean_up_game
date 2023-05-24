@@ -126,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Visibility(
                           visible: user != null,
                           child: Text(
-                            user?.email?.toString() ?? '',
+                            user?.email?.toString() ?? 'Anonym',
                             style: TextStyle(
                               fontSize: headerSize - 3,
                               color: Theme.of(context).colorScheme.secondary,
