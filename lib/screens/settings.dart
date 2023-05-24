@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: getAppBar(context, 'Einstellungen', false),
+        appBar: getAppBar(context, 'Settings', false),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -62,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Text(
-                  'Personalisierung',
+                  'Personalization',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -100,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Text(
-                  'Allgemein',
+                  'General',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -118,7 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Konto',
+                          'Account',
                           style: TextStyle(
                             fontSize: headerSize,
                           ),
@@ -126,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Visibility(
                           visible: user != null,
                           child: Text(
-                            user?.email?.toString() ?? 'Anonym',
+                            user?.email?.toString() ?? 'Anonymous',
                             style: TextStyle(
                               fontSize: headerSize - 3,
                               color: Theme.of(context).colorScheme.secondary,
@@ -143,7 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         user == null ? login() : logout();
                       },
                       icon: const Icon(Icons.login_rounded),
-                      label: Text(user == null ? "Anmelden" : "Abmelden"),
+                      label: Text(user == null ? "Log in" : "Log out"),
                     ),
                   ),
                 ],
