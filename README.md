@@ -57,7 +57,7 @@ This is a the companion app for the Campus Clean Up Game organized by [OurFuture
 - Run the app
 
     ```bash
-    flutter run [-d Chrome]
+    flutter run [-d Chrome / Edge / ...]
     ```
 
 ## Deployment
