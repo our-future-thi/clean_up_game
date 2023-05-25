@@ -24,14 +24,27 @@ class SignInButton extends StatelessWidget {
     // assert that exactly one of img or icon is not null
     assert((img == null) != (icon == null));
 
+    // 🤡 ugly ass code to keep this responsive to theme
+    var uglyWhite = Theme.of(context)
+        .colorScheme
+        .primaryContainer
+        .withBlue(255)
+        .withGreen(255)
+        .withRed(255);
+    var uglyBlack = Theme.of(context)
+        .colorScheme
+        .primaryContainer
+        .withBlue(0)
+        .withGreen(0)
+        .withRed(0);
+
     var logo = img != null
         ? SvgPicture.asset(
             img!,
             height: 30,
           )
         : Icon(icon,
-            size: 30,
-            color: themeNotifier.isDark ? Colors.black : Colors.white);
+            size: 30, color: themeNotifier.isDark ? uglyBlack : uglyWhite);
 
     return ElevatedButton(
       onPressed: () async {
@@ -42,20 +55,7 @@ class SignInButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         elevation: 5,
-        // 🤡 ugly ass code to keep this responsive to theme
-        backgroundColor: themeNotifier.isDark
-            ? Theme.of(context)
-                .colorScheme
-                .primaryContainer
-                .withBlue(255)
-                .withGreen(255)
-                .withRed(255)
-            : Theme.of(context)
-                .colorScheme
-                .primaryContainer
-                .withBlue(0)
-                .withGreen(0)
-                .withRed(0),
+        backgroundColor: themeNotifier.isDark ? uglyWhite : uglyBlack,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
