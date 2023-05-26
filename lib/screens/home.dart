@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:clean_up_game/screens/utils/log_card.dart';
 import 'package:clean_up_game/services/auth.dart';

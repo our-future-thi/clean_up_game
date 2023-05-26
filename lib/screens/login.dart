@@ -10,7 +10,7 @@ import '../shared/appbar.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  final MAX_WIDTH = 600.0;
+  final maxWidth = 600.0;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +18,11 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         appBar: getAppBar(context, 'Login'),
         body: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: MAX_WIDTH),
+          constraints: BoxConstraints(maxWidth: maxWidth),
           child: Stack(
             children: [
               Positioned.fill(
-                top: min(MediaQuery.of(context).size.width / 2, MAX_WIDTH / 2),
+                top: min(MediaQuery.of(context).size.width / 2, maxWidth / 2),
                 child: Container(
                   color: HSLColor.fromColor(
                           Theme.of(context).colorScheme.background)
