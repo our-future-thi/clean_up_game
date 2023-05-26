@@ -52,13 +52,13 @@ class SignInButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
         ),
         elevation: 5,
         backgroundColor: themeNotifier.isDark ? uglyWhite : uglyBlack,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
             invert && themeNotifier.isDark
