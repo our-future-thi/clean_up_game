@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: size + 32),
                   child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: logs.length,
                     itemBuilder: (context, index) => LogCard(
