@@ -38,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    var isAdmin = Provider.of<bool>(context);
+
     var logs = Provider.of<List<Log>>(context);
     var credits = logs.fold<int>(
         0, (previousValue, element) => previousValue + element.change);
@@ -50,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     return SafeArea(
       child: Scaffold(
-        appBar: getAppBar(context, 'Clean Up Game'),
+        appBar: getAppBar(context, 'Clean Up Game', isAdmin, true),
         body: Align(
           alignment: Alignment.topCenter,
           child: SingleChildScrollView(

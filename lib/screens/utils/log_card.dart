@@ -9,14 +9,18 @@ class LogCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textColor = log.change > 0
-        ? Theme.of(context).colorScheme.onPrimaryContainer
-        : Theme.of(context).colorScheme.onTertiaryContainer;
+    var textColor = log.cancelled
+        ? Theme.of(context).colorScheme.onErrorContainer
+        : (log.change > 0
+            ? Theme.of(context).colorScheme.onPrimaryContainer
+            : Theme.of(context).colorScheme.onTertiaryContainer);
 
     return Card(
-      color: log.change > 0
-          ? Theme.of(context).colorScheme.primaryContainer
-          : Theme.of(context).colorScheme.tertiaryContainer,
+      color: log.cancelled
+          ? Theme.of(context).colorScheme.errorContainer
+          : (log.change > 0
+              ? Theme.of(context).colorScheme.primaryContainer
+              : Theme.of(context).colorScheme.tertiaryContainer),
       child: ListTile(
           title: Text(
             log.name,
@@ -27,9 +31,11 @@ class LogCard extends StatelessWidget {
             style: TextStyle(color: textColor),
           ),
           leading: Icon(
-            log.change > 0
-                ? Icons.restore_from_trash_rounded
-                : Icons.emoji_food_beverage_rounded,
+            log.cancelled
+                ? Icons.cancel_rounded
+                : (log.change > 0
+                    ? Icons.restore_from_trash_rounded
+                    : Icons.emoji_food_beverage_rounded),
             color: textColor,
           )),
     );

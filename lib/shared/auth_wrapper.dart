@@ -21,14 +21,21 @@ class _AuthWrapperState extends State<AuthWrapper> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (_, snapshot) => FirebaseAuth.instance.currentUser == null
           ? const LoginScreen()
-          : StreamProvider<List<Log>>(
-              create: (_) => FirestoreService().getLogsFromPlayer(
-                  FirebaseAuth.instance.currentUser?.uid ?? ''),
-              initialData: List<Log>.empty(),
+          : StreamProvider<bool>(
+              create: (_) => FirestoreService().isAdmin(),
+              initialData: false,
               catchError: (context, error) {
-                return List<Log>.empty();
+                return false;
               },
-              child: widget.child,
+              child: StreamProvider<List<Log>>(
+                create: (_) => FirestoreService().getLogsFromPlayer(
+                    FirebaseAuth.instance.currentUser?.uid ?? ''),
+                initialData: List<Log>.empty(),
+                catchError: (context, error) {
+                  return List<Log>.empty();
+                },
+                child: widget.child,
+              ),
             ),
     );
   }
