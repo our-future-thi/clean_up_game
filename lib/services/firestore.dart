@@ -7,9 +7,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Stream<List<Log>> getLogsFromPlayer(String playerId) {
+  Stream<List<Log>> getLogsFromPlayer(String? playerId) {
+    if (playerId == null || playerId.isEmpty) {
+      return Stream<List<Log>>.value(List<Log>.empty());
+    }
+
     var ref = _db.collection('players');
     var playerRef = ref.doc(playerId);
+
     var logRef =
         playerRef.collection('logs').orderBy('timestamp', descending: true);
 
