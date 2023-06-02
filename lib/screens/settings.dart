@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: getAppBar(context, 'Settings', false),
+        appBar: getAppBar(context, 'Settings', false, false),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
